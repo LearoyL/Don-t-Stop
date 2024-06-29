@@ -1,0 +1,50 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://Sprite/Characters/Spritesheet/spritesheet_characters.png" type="Texture" id=1]
+[ext_resource path="res://Gun/Weapon.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Characters/Enemy.gd" type="Script" id=3]
+[ext_resource path="res://Characters/Health.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Characters/AI.gd" type="Script" id=5]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 13.5, 16 )
+
+[sub_resource type="CircleShape2D" id=2]
+radius = 150.213
+
+[node name="Enemy" type="KinematicBody2D" groups=["enemy"]]
+script = ExtResource( 3 )
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 425, 44, 33, 43 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( -3.5, 0 )
+shape = SubResource( 1 )
+
+[node name="Weapon" parent="." instance=ExtResource( 2 )]
+position = Vector2( 23, 11 )
+scale = Vector2( 0.9, 0.9 )
+
+[node name="Health" parent="." instance=ExtResource( 4 )]
+
+[node name="AI" type="Node2D" parent="."]
+position = Vector2( -3.5, 0 )
+script = ExtResource( 5 )
+
+[node name="PlayerDetectionZone" type="Area2D" parent="AI"]
+position = Vector2( 3.5, 0 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AI/PlayerDetectionZone"]
+shape = SubResource( 2 )
+
+[node name="PlayerDetectionZoneLeave" type="Area2D" parent="AI"]
+position = Vector2( 3.5, 0 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AI/PlayerDetectionZoneLeave"]
+shape = SubResource( 2 )
+
+[connection signal="body_entered" from="AI/PlayerDetectionZone" to="AI" method="_on_PlayerDetectionZone_body_entered"]
+[connection signal="body_exited" from="AI/PlayerDetectionZoneLeave" to="AI" method="_on_PlayerDetectionZoneLeave_body_exited"]
