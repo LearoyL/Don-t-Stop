@@ -28,7 +28,12 @@ func _physics_process(_delta): # Process the player movement
 func _unhandled_input(event): # Handle the player input of shooting
 	if event.is_action_pressed("shoot"):
 		weapon.shoot()
+	elif event.is_action_pressed("reload"):
+		weapon.start_reload()
 
 func take_damage():
 	health_stat.health -= 20
-	print("Player took damage, ", health_stat.health)
+	# print("Player took damage, ", health_stat.health)
+
+func reload():
+	weapon.start_reload()
