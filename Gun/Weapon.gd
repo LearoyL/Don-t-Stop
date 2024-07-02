@@ -18,6 +18,7 @@ func shoot():
 			var bullet_instance = Bullet.instance()
 			var direction = gun_direction.global_position - end_of_gun.global_position
 			# print("shoot")
+			print("Emitting bullet_fired signal")
 			GlobalSignals.emit_signal("bullet_fired", bullet_instance, end_of_gun.global_position, direction.normalized())
 			attack_cooldown.start()
 			animation_player.play("muzzle_flash")

@@ -10,6 +10,7 @@ onready var kill_timer = $KillTimer
 
 func _ready():
 	kill_timer.start()
+	add_to_group("bullets")
 
 func _physics_process(_delta):
 	if direction != Vector2.ZERO:
