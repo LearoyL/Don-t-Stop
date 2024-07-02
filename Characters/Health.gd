@@ -1,6 +1,7 @@
 extends Node2D
 
-export(int) var health = 100 setget health_stat
+export var max_health: int = 100
+var health: int = max_health setget set_health
 
-func health_stat(new_health: int):
-	health = clamp(new_health, 0, 100) # Clamp the health between 0 and 100
+func set_health(value: int):
+    health = clamp(value, 0, max_health)

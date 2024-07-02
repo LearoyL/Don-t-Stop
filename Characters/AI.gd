@@ -31,6 +31,7 @@ func _process(_delta):
 				actor.rotation = actor.global_position.direction_to(player.global_position).angle()
 		State.ENGAGE:
 			if player != null and weapon != null:
+				actor.move_and_slide(actor.global_position.direction_to(player.global_position) * move_speed)
 				actor.rotation = actor.global_position.direction_to(player.global_position).angle()
 				weapon.shoot()
 			else:

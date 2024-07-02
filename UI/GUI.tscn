@@ -1,6 +1,8 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://UI/GUI.gd" type="Script" id=1]
+[ext_resource path="res://UI/HealthBar.gd" type="Script" id=2]
+[ext_resource path="res://Sprite/FlatUI/kenneyUI-green.tres" type="Theme" id=3]
 
 [node name="GUI" type="CanvasLayer"]
 follow_viewport_enable = true
@@ -11,6 +13,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
 mouse_default_cursor_shape = 3
+theme = ExtResource( 3 )
 custom_constants/margin_right = 50
 custom_constants/margin_top = 50
 custom_constants/margin_left = 50
@@ -19,29 +22,31 @@ custom_constants/margin_bottom = 50
 [node name="Rows" type="VBoxContainer" parent="MarginContainer"]
 margin_left = 50.0
 margin_top = 50.0
-margin_right = 974.0
-margin_bottom = 750.0
+margin_right = 1230.0
+margin_bottom = 670.0
 mouse_filter = 2
 
 [node name="TopRow" type="HBoxContainer" parent="MarginContainer/Rows"]
-margin_right = 924.0
-margin_bottom = 84.0
+margin_right = 1180.0
+margin_bottom = 74.0
 size_flags_vertical = 3
+alignment = 2
 
 [node name="MiddleRow" type="HBoxContainer" parent="MarginContainer/Rows"]
-margin_top = 88.0
-margin_right = 924.0
-margin_bottom = 676.0
+margin_top = 78.0
+margin_right = 1180.0
+margin_bottom = 596.0
 size_flags_vertical = 3
 size_flags_stretch_ratio = 7.0
 
 [node name="BottomRow" type="HBoxContainer" parent="MarginContainer/Rows"]
-margin_top = 680.0
-margin_right = 924.0
-margin_bottom = 700.0
+margin_top = 600.0
+margin_right = 1180.0
+margin_bottom = 620.0
 
-[node name="HeakthBar" type="ProgressBar" parent="MarginContainer/Rows/BottomRow"]
+[node name="HealthBar" type="ProgressBar" parent="MarginContainer/Rows/BottomRow"]
 margin_right = 200.0
 margin_bottom = 20.0
 rect_min_size = Vector2( 200, 20 )
 size_flags_vertical = 1
+script = ExtResource( 2 )

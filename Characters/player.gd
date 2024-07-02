@@ -3,10 +3,17 @@ class_name Player
 
 
 export(int) var SPEED = 300
+export(int) var MAX_HEALTH = 100
+
+signal player_took_damage(new_health)
 
 onready var health_stat = $Health
 onready var weapon = $Weapon
 
+var current_health: int = MAX_HEALTH
+
+func _ready():
+	current_health = MAX_HEALTH
 
 func _physics_process(_delta): # Process the player movement
 	var movement_direction := Vector2()
@@ -31,9 +38,9 @@ func _unhandled_input(event): # Handle the player input of shooting
 	elif event.is_action_pressed("reload"):
 		weapon.start_reload()
 
-func take_damage():
-	health_stat.health -= 20
-	# print("Player took damage, ", health_stat.health)
-
+func take_damage(amount: int = 5):
+	current_health = max(0 ,current_health - amount)
+	print("Player took damage: ", current_health)
+	emit_signal("player_took_damage", current_health)
 func reload():
 	weapon.start_reload()
